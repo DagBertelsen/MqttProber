@@ -25,7 +25,7 @@
 #topic =
 
 # Qos level to publish the HwProbe mqtt message (Default: 0)
-#qos = 0
+#qos = 
 
 # Sets if the HwProbe mqtt message should be retained (Default: False)
 #retain =
