@@ -137,7 +137,7 @@ def getProbeReport(diskUsageFromPaths=["."]):
         tempSensors = psutil.sensors_temperatures()
         if len(tempSensors) > 0:
             # Has some sensors to show.. add them
-            serverStatus.update({'temp_sensors': tempSensors._asdict()})
+            serverStatus.update({'temp_sensors': tempSensors})
     except AttributeError:
         print("Unable to get sensors_temperatures")
 
@@ -147,7 +147,7 @@ def getProbeReport(diskUsageFromPaths=["."]):
         tempSensors = psutil.sensors_fans()
         if len(tempSensors) > 0:
             # Has some sensors to show.. add them
-            serverStatus.update({'fan_sensors': tempSensors._asdict()})
+            serverStatus.update({'fan_sensors': tempSensors})
     except AttributeError:
         print("Unable to get sensors_fans")
 
