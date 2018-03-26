@@ -1,7 +1,7 @@
 from HardwareProbe import getProbeReport as hwProbeReport
 import paho.mqtt.publish as mqttPublisher
 from configparser import ConfigParser
-import json
+import simplejson as json
 import os
 import sys
 
@@ -36,6 +36,7 @@ def main():
 
 
     # Get HwProbeSensor settings from config.
+    isRaspberryPi = config['HwProbeSensor'].getboolean('isRaspberryPi', False)
     hwProbeTopic = config['HwProbeSensor'].get('topic', "hwprobe")
     hwProbeQos = config['HwProbeSensor'].getint('qos', 0)
     hwProbeRetain = config['HwProbeSensor'].getboolean('retain', False)
@@ -45,13 +46,13 @@ def main():
     diskUsageForDrives = hwProbegetDiskUsageForDrives.split(",")
 
     # Get the Harware probe report.
-    sensorDict = hwProbeReport(diskUsageForDrives)
+    sensorDict = hwProbeReport(diskUsageForDrives, isRaspberryPi)
 
     # for debugging:
-    # print(json.dumps(sensorDict))
+    # print(json.dumps(sensorDict,namedtuple_as_object=True))
 
     # Convert this to a message so we can get the next sensor
-    sensorsDictmsg = {'topic': hwProbeTopic, 'payload': json.dumps(sensorDict), 'qos': hwProbeQos, 'retain': hwProbeRetain}
+    sensorsDictmsg = {'topic': hwProbeTopic, 'payload': json.dumps(sensorDict, namedtuple_as_object=True), 'qos': hwProbeQos, 'retain': hwProbeRetain}
 
     # Add this message to the list
     messagesToPublish.append(sensorsDictmsg)

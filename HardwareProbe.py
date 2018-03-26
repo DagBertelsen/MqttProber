@@ -5,14 +5,6 @@ import time
 import os
 import platform
 
-# Hack to check if we are running on a Raspberry pi by trying to import the rpi GPIO library:
-try:
-    import RPi.GPIO as gpio
-    isRaspberryPi = True
-except ImportError:
-    isRaspberryPi = False
-
-
 def get_rpi_cpu_temperature():
     """Raspberry pi specific cpu temp sensor. Uses a Raspbbery batch command to get the temperature.
     This vcgencmd command returns [temp=42.9'C] and is then processed by python to return the number in
@@ -69,7 +61,7 @@ def getLoad():
         load.update({"10m": round(system_load[2], 2)})
         return load
 
-def getProbeReport(diskUsageFromPaths=["."]):
+def getProbeReport(diskUsageFromPaths=["."], isRaspberryPi=False):
     """Retrieve a dictionary that contains the server status. Depending on the os used will contain the rpi cpu temp if
     running on a Raspberry pi, cpu percent if running in linux and active user processes if running on linux or
     darwin (osx)
@@ -105,17 +97,17 @@ def getProbeReport(diskUsageFromPaths=["."]):
             serverStatus.update({'rpi_cpu_tmp': rpi_cpu_temp})
 
     # Next section is available in all systems:
-    serverStatus.update({'ram': psutil.virtual_memory()._asdict()})
+    serverStatus.update({'ram': psutil.virtual_memory()})
 
     # Get percent used on current disk this script is running on
     diskUsages = {}
     for path in diskUsageFromPaths:
         # Get all the drives we should get the disk usage for:
-        diskUsages.update({path : psutil.disk_usage(path)._asdict()})
+        diskUsages.update({path : psutil.disk_usage(path)})
     serverStatus.update({'disk': diskUsages})
 
     # Get the amount of swap used:
-    serverStatus.update({'swap': psutil.swap_memory()._asdict()})
+    serverStatus.update({'swap': psutil.swap_memory()})
 
     # Get uptime in seconds
     upTimeInSeconds = int(time.time()) - psutil.boot_time()

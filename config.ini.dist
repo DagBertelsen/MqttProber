@@ -21,6 +21,9 @@
 #auth_password =
 
 [HwProbeSensor]
+# If true retrieves the Raspberry pi cpu temperature. Note this works only on a Raspberry Pi! (Default: False)
+#isRaspberryPi =
+
 # The MQTT base topic to publish all HWProbe sensor data topics under. (Default: hwprobe)
 #topic =
 

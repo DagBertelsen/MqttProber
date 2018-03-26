@@ -19,6 +19,8 @@ pip-delete-this-directory.txt
 # PyBuilder
 target/
 
+.idea/
+
 # pyenv
 .python-version
 
