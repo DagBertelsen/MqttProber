@@ -1,0 +1,38 @@
+# Configuration file
+#
+# Uncomment and adapt all settings as needed.
+# config file with name config.ini is also supported.
+
+[Broker]
+# The hostname or IP address of the MQTT broker to connect to (Default: localhost)
+#host =
+
+# The TCP port the MQTT broker is listening on (Default: 1883)
+#port =
+
+# Client id to use for publishing Hardware sensor values (Default: HwProbeSensor)
+#client_id =
+
+# Maximum period in seconds between ping messages to the broker. (Default: 60)
+#keepalive =
+
+# The MQTT broker authentification credentials (Default: no authentication)
+#auth_username =
+#auth_password =
+
+[HwProbeSensor]
+# The MQTT base topic to publish all HWProbe sensor data topics under. (Default: hwprobe)
+#topic =
+
+# Qos level to publish the HwProbe mqtt message (Default: 0)
+#qos = 0
+
+# Sets if the HwProbe mqtt message should be retained (Default: False)
+#retain =
+
+# Sets the drives to get the usage report from. This should be a comma seperated string like:
+# /,/boot
+# Defaults to "." that results in disk usage report for the drive this script is running on.
+# If this drive path is not found it will cause an exception.
+#diskUsageForDrives = /,/boot
+
