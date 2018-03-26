@@ -48,7 +48,7 @@ def main():
     sensorDict = hwProbeReport(diskUsageForDrives)
 
     # for debugging:
-    print(json.dumps(sensorDict))
+    # print(json.dumps(sensorDict))
 
     # Convert this to a message so we can get the next sensor
     sensorsDictmsg = {'topic': hwProbeTopic, 'payload': json.dumps(sensorDict), 'qos': hwProbeQos, 'retain': hwProbeRetain}
