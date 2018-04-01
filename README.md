@@ -11,6 +11,7 @@ python MqttProbe.py
 **Python**
 1. paho-mqtt
 2. psutil
+3. simplejson
 
 **Linux**
 1. sysstat
