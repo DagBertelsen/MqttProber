@@ -35,7 +35,6 @@ def get_amount_of_updates_available():
         # The human-readable outputs to lines, first has the amount of normal packages needing updates
         # second has the amount of security updates needing updates.
         byte_array = output.split(b'\n')
-        sensor.brita_packages
 
         # E-> got what we need so get the amount of packages and security that can be upgraded.
         package_updates = re.sub(r'\D', "", byte_array[0].decode())
