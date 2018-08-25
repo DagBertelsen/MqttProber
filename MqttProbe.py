@@ -26,6 +26,15 @@ def main():
     keepAlive = config['Broker'].getint('keepalive', 60)
     userName = config['Broker'].get('auth_username', None)
     passWord = config['Broker'].get('auth_password', None)
+    caCerts = config['Broker'].get('ca_certs', None)
+
+    # :? Is caCerts disabled??
+    if caCerts is None:
+        # -> Yes, then set tls to None:
+        tls = None
+    else:
+        # E-> No tls is enabled
+        tls = {'ca_certs': caCerts}
 
     if userName is None or passWord is None:
         # Either Username or password is not set. Both should be set before setting auth:
@@ -60,7 +69,7 @@ def main():
     # Add any other customs sensors here and append to messagesToPublish, these will be published in turn.
 
     # Finally publish the messages in the list:
-    mqttPublisher.multiple(messagesToPublish, brokerHost, brokerTcpPort, clientId, keepAlive, None, auth)
+    mqttPublisher.multiple(messagesToPublish, brokerHost, brokerTcpPort, clientId, keepAlive, None, auth, tls)
 
 
 if __name__ == '__main__':

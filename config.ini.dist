@@ -20,6 +20,10 @@
 #auth_username =
 #auth_password =
 
+# if tls should be enabled on the MQTT broker, should point to ca-certificates.crt (Default: disabled)
+# Ex: ca_certs = /etc/ssl/certs/ca-certificates.crt
+#ca_certs=
+
 [HwProbeSensor]
 # If true retrieves the Raspberry pi cpu temperature. Note this works only on a Raspberry Pi! (Default: False)
 #isRaspberryPi =

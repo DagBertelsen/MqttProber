@@ -8,9 +8,10 @@ python MqttProbe.py
 ```
 
 ## Requirements
-**Python**
+**Python 3**
 1. paho-mqtt
 2. psutil
 
 **Linux**
 1. sysstat
+2. update-notifier-common (optional)
